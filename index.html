@@ -1,5 +1,54 @@
 <html>
+    <head>
+        <link href="style.css" rel="stylesheet" />
+    </head>
     <body>
+        <h1>Food</h1>
+        <div id="template">
+            <div  class="product">
+                <div class="product_image">
+                    <img src="{{image}}" />
+                </div>
+                <div class="product_description">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div id="list"></div>
+    <script>
+        var products = [
+            {
+                name:"Morshinska",
+                description:"non sparkling",
+                color: "",
+                image:"http://freshfactory.ua/upload/menuproductsimages/image-0000103.jpg"
+            },
+            {
+                name:"CocaCola",
+                description:"USA sparkling water",
+                color: "brown",
+                image:"http://thejizn.com/wp-content/uploads/2016/06/coca-cola-stash-can-12-oz-1_1.jpg"
+            },
+            {
+                name:"Buratino",
+                description:"USSR sparkling water",
+                color: "yellow",
+                image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg"
+            }
+        ];
         
+        var template = document.querySelector('#template');
+        var list = document.querySelector('#list');
+        products.forEach(function(element){
+            var block = template.innerHTML;
+            block = block.replace("{{name}}", element.name)
+                .replace("{{image}}", element.image)
+                .replace("{{description}}", element.description);
+            list.innerHTML += block;
+        });
+    </script>
     </body>
 </html>
+

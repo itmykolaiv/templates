@@ -1,0 +1,13 @@
+.product_image {
+    float: left;
+    width:100px;
+}
+
+.product_image img {
+   
+    height: 100px;
+}
+
+#template {
+    display: none;
+}
