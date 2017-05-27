@@ -4,6 +4,12 @@
     </head>
     <body>
         <h1>Food</h1>
+        <form>
+            <input type="checkbox" class="filter-checkbox" name="color[]" value="yellow" /> <lable>yellow</lable> 
+            <input type="checkbox" class="filter-checkbox" name="color[]" value="brown" /> <lable>brown</lable> 
+             <input type="checkbox" class="filter-checkbox" name="color[]" value="" /> <lable>No color</lable>
+            <input id="filter-btn" type="button" value="Filter" />
+        </form>
         <div id="template">
             <div  class="product">
                 <div class="product_image">
@@ -36,18 +42,49 @@
                 description:"USSR sparkling water",
                 color: "yellow",
                 image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg"
+            },
+            {
+                name:"Sitro",
+                description:"USSR sparkling water",
+                color: "yellow",
+                image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg"
             }
         ];
         
         var template = document.querySelector('#template');
         var list = document.querySelector('#list');
-        products.forEach(function(element){
-            var block = template.innerHTML;
-            block = block.replace("{{name}}", element.name)
-                .replace("{{image}}", element.image)
-                .replace("{{description}}", element.description);
-            list.innerHTML += block;
+       
+        document.querySelector('#filter-btn').addEventListener('click', function(){
+            list.innerHTML = "";
+            var checkboxes = document.querySelectorAll('.filter-checkbox:checked');
+            
+            var colors = [];
+            checkboxes.forEach(function(element){
+                    colors.push(element.value);
+            });
+
+
+            var products_filtered = filterProductsByColor(colors, products)
+
+            products_filtered.forEach(function(element){
+                var block = template.innerHTML;
+                block = block.replace("{{name}}", element.name)
+                    .replace("{{image}}", element.image)
+                    .replace("{{description}}", element.description);
+                list.innerHTML += block;
+            });
         });
+
+        function filterProductsByColor (colors, products) {
+            var filtered_products = products.filter(function(element){
+                //var colors = ["yellow","brown"];
+                if(colors.indexOf(element.color) !== -1) {
+                    return true;
+                }
+            });
+            return filtered_products;
+        }
+
     </script>
     </body>
 </html>
