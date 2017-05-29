@@ -16,6 +16,7 @@
                     <img src="{{image}}" />
                 </div>
                 <div class="product_description">
+                    <h1>{{brand}}</h1>
                     <h3>{{name}}</h3>
                     <p>{{description}}</p>
                 </div>
@@ -29,25 +30,29 @@
                 name:"Morshinska",
                 description:"non sparkling",
                 color: "",
-                image:"http://freshfactory.ua/upload/menuproductsimages/image-0000103.jpg"
+                image:"http://freshfactory.ua/upload/menuproductsimages/image-0000103.jpg",
+                brand: "Morshinska"
             },
             {
                 name:"CocaCola",
                 description:"USA sparkling water",
                 color: "brown",
-                image:"http://thejizn.com/wp-content/uploads/2016/06/coca-cola-stash-can-12-oz-1_1.jpg"
+                image:"http://thejizn.com/wp-content/uploads/2016/06/coca-cola-stash-can-12-oz-1_1.jpg",
+                brand: "Pepsi"
             },
             {
                 name:"Buratino",
                 description:"USSR sparkling water",
                 color: "yellow",
-                image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg"
+                image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg",
+                brand: "Obolon"
             },
             {
                 name:"Sitro",
                 description:"USSR sparkling water",
                 color: "yellow",
-                image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg"
+                image:"https://teremok.sm.ua/wa-data/public/shop/products/77/00/70077/images/32758/32758.750x0.jpeg",
+                brand: "Biola"
             }
         ];
         
@@ -68,9 +73,12 @@
 
             products_filtered.forEach(function(element){
                 var block = template.innerHTML;
-                block = block.replace("{{name}}", element.name)
+                block = block.replace(/{{([a-z]+)}}/g,function(str, offset, s){
+                     return  element[offset];
+                });
+                /*block = block.replace("{{name}}", element.name)
                     .replace("{{image}}", element.image)
-                    .replace("{{description}}", element.description);
+                    .replace("{{description}}", element.descriptoni;*/
                 list.innerHTML += block;
             });
         });
